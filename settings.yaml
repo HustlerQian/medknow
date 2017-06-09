@@ -1,0 +1,87 @@
+########################## 
+# CONFIGURATION FILE FOR VARIABLES 
+# USED ACROSS THE PROJECT 
+##########################
+
+
+
+# Variables regarding loading
+load:
+  # Paths to binaries/files
+  path:
+    # Path to metamap
+    metamap: /home/kostas/Downloads/public_mm_core/bin/metamap16
+    # Path to reverb
+    reverb: /media/kostas/DATA/GIT/reverb/core/
+    # Path to semrep
+    semrep: /media/kostas/DATA/LLD/SEMREP/public_semrep/bin/
+  # Variables regarding fields to read from
+  vars:
+    # For medical records
+    med_rec:
+      # Path to medical record txt
+      inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/100-patients/AdmissionsDiagnosesCorePopulatedTable.txt
+      # Medical record name of the column to read text from
+      text_field: PrimaryDiagnosisDescription
+      # Field separator
+      sep: \t
+    json:
+      # Path to json from harvester
+      inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/DMDraw_testsetDMD.json
+
+
+
+
+# Variables regarding apis
+apis:
+  # Biontology for mapping cuis to uris
+  biont: 1dd5cfd3-3a7b-4d34-8254-242e72d2a12b
+
+
+
+# Neoj variables
+neo4j:
+  # DB path
+  path: 
+  # DB name
+  name:
+
+# Output variables
+out:
+
+   # Resulting .json file before neo4j
+  json:
+    # Path
+    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/
+  # Resulting .json file before neo4j
+  csv:
+    # Path
+    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/
+  # Resulting .json file before neo4j
+  neo4j:
+    # Path
+    out_path: localhost", port=7474, user='neo4j', password='admin
+
+# Pipeline flags for what processes to perform on the data
+pipeline:
+  # What  to read
+  in:
+    # Input
+    inp: 'med_rec' # med_rec or json currently. Future, the doid sample etc..
+  # What to do with it
+  trans:
+    # Extract entities using metamap?
+    metamap: False
+    # Extract relations using reverb?
+    reverb: False
+    # Extract entities + relations through semrep?
+    semrep: True
+  # What to do with the outcome
+  out:
+    # Create json output?
+    json: True
+    # Create .csv files for neo4j?
+    csv: True
+    # Create-update neo4 db?
+    neo4j: True
+
