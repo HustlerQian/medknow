@@ -20,28 +20,35 @@ load:
     # Path to medical record txt
     inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/100-patients/AdmissionsDiagnosesCorePopulatedTable.txt
     # Medical record name of the column to read text from
-    text_field: PrimaryDiagnosisDescription
+    textfield: PrimaryDiagnosisDescription
     # Field separator
     sep: \t
-    # Output json outer field name for the documents
-    json_doc_field: documents
-    # Output json text field for each document
-    json_text_field: text
+    # Idfield
+    idfield: AdmissionID
   # For json files
   json:
     # Path to json from harvester
     inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/DMDraw_testsetDMD.json
     # Outer field name for the json documents
-    doc_field: documents
+    docfield: documents
     # Name of the field to read text from
-    text_field: abstractText
-    # Output json outer field name for the documents
-    json_doc_field: documents
-    # Output json text field for each document
-    json_text_field: abstractText
+    textfield: abstractText
+    # Idfield
+    idfield: pmid
+    # Label field
+    labelfield: abstractTitle
   mesh:
     # Path to mapping between
     inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/CUI_TO_MESH/cui2mesh.dic
+  edges:
+    # Path to edges file
+    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/doid2.json
+    # Name of the field where edges are stored
+    edge_field: relations
+    # Type of the subject
+    sub_type: Entity
+    # Type of the object
+    obj_type: Entity
 
 
 
@@ -55,10 +62,15 @@ apis:
 
 # Neoj variables
 neo4j:
-  # DB path
-  path: 
-  # DB name
-  name:
+  # DB url
+  server: localhost
+  # port
+  port: 7474 
+  # user name
+  user: neo4j
+  # password
+  password: admin
+
 
 # Output variables
 out:
@@ -66,14 +78,22 @@ out:
   json:
     # Path
     out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/out/enriched.json
+    # Output json outer field name for the documents
+    json_doc_field: documents
+    # Output json text field for each document
+    json_text_field: text
+    # Output Idfield
+    json_id_field: pmid
+    # Output Label field
+    json_label_field: title
   # Resulting .json file before neo4j
   csv:
     # Path
-    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/
+    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/out
   # Resulting .json file before neo4j
   neo4j:
     # Path
-    out_path: localhost", port=7474, user='neo4j', password='admin
+    out_path: localhost:7474 
 
 # Pipeline flags for what processes to perform on the data
 pipeline:
@@ -94,7 +114,7 @@ pipeline:
     # Create json output?
     json: True
     # Create .csv files for neo4j?
-    csv: False
+    csv: True
     # Create-update neo4 db?
     neo4j: False
 
