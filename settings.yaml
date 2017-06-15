@@ -28,7 +28,7 @@ load:
   # For json files
   json:
     # Path to json from harvester
-    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/DMDraw_testsetDMD.json
+    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/DMD/test_medknow.json
     # Outer field name for the json documents
     docfield: documents
     # Name of the field to read text from
@@ -36,7 +36,7 @@ load:
     # Idfield
     idfield: pmid
     # Label field
-    labelfield: abstractTitle
+    labelfield: title
   mesh:
     # Path to mapping between
     inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/CUI_TO_MESH/cui2mesh.dic
@@ -63,7 +63,7 @@ apis:
 # Neoj variables
 neo4j:
   # DB url
-  server: localhost
+  host: localhost
   # port
   port: 7474 
   # user name
@@ -100,7 +100,7 @@ pipeline:
   # What  to read
   in:
     # Input
-    inp: med_rec # med_rec or json currently. Future, the doid sample etc..
+    inp: json # med_rec or json currently. Future, the doid sample etc..
   # What to do with it
   trans:
     # Extract entities using metamap?
@@ -108,13 +108,13 @@ pipeline:
     # Extract relations using reverb?
     reverb: False
     # Extract entities + relations through semrep?
-    semrep: True
+    semrep: False
   # What to do with the outcome
   out:
     # Create json output?
-    json: True
+    json: False
     # Create .csv files for neo4j?
     csv: True
     # Create-update neo4 db?
-    neo4j: False
+    neo4j: True
 
