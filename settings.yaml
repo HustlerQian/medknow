@@ -4,7 +4,36 @@
 ##########################
 
 
+##########################  PIPELINE  ########################## 
+# Pipeline flags for what processes to perform on the data
+pipeline:
+  # What  to read
+  in:
+    # Input
+    inp: json # med_rec or json currently. Future, the doid sample etc..
+  # What to do with it
+  trans:
+    # Extract entities using metamap?
+    metamap: False
+    # Extract relations using reverb?
+    reverb: False
+    # Extract entities + relations through semrep?
+    semrep: False
+  # What to do with the outcome
+  out:
+    # Create json output?
+    json: False
+    # Create .csv files for neo4j?
+    csv: True
+    # Create-update neo4 db?
+    neo4j: True
+########################## END PIPELINE ########################## 
 
+
+
+
+
+##########################  INPUT ##########################
 # Variables regarding loading
 load:
   # Paths to binaries/files
@@ -49,17 +78,20 @@ load:
     sub_type: Entity
     # Type of the object
     obj_type: Entity
+##########################  END INPUT ##########################
 
 
 
-
+##########################  API KEYS ##########################
 # Variables regarding apis
 apis:
   # Biontology for mapping cuis to uris
   biont: 1dd5cfd3-3a7b-4d34-8254-242e72d2a12b
+##########################  END API KEYS ##########################
 
 
 
+##########################  NEO4j ##########################
 # Neoj variables
 neo4j:
   # DB url
@@ -70,8 +102,11 @@ neo4j:
   user: neo4j
   # password
   password: admin
+##########################  END NEO4j ##########################
 
 
+
+##########################  OUTPUT ##########################
 # Output variables
 out:
    # Resulting .json file before neo4j
@@ -92,29 +127,9 @@ out:
     out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/out
   # Resulting .json file before neo4j
   neo4j:
-    # Path
-    out_path: localhost:7474 
+    # Just for printing! Change the Neo4j field variables, not this!
+    out_path: localhost:7474
+##########################  END OUTPUT ##########################
 
-# Pipeline flags for what processes to perform on the data
-pipeline:
-  # What  to read
-  in:
-    # Input
-    inp: json # med_rec or json currently. Future, the doid sample etc..
-  # What to do with it
-  trans:
-    # Extract entities using metamap?
-    metamap: False
-    # Extract relations using reverb?
-    reverb: False
-    # Extract entities + relations through semrep?
-    semrep: False
-  # What to do with the outcome
-  out:
-    # Create json output?
-    json: False
-    # Create .csv files for neo4j?
-    csv: True
-    # Create-update neo4 db?
-    neo4j: True
+
 
