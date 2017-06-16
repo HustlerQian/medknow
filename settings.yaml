@@ -78,6 +78,11 @@ load:
     sub_type: Entity
     # Type of the object
     obj_type: Entity
+    # Id_field of the subject
+    sub_source: None
+    # 
+    obj_source: None
+    
 ##########################  END INPUT ##########################
 
 
@@ -86,7 +91,9 @@ load:
 # Variables regarding apis
 apis:
   # Biontology for mapping cuis to uris
-  biont: 1dd5cfd3-3a7b-4d34-8254-242e72d2a12b
+  biont: ------------------------------------
+# Umls ticket service
+  umls: -------------------------------------
 ##########################  END API KEYS ##########################
 
 
