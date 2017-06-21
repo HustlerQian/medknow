@@ -95,9 +95,9 @@ load:
 # Variables regarding apis
 apis:
   # Biontology for mapping cuis to uris
-  biont: 1dd5cfd3-3a7b-4d34-8254-242e72d2a12b
+  biont: -----------------------------------
   # Umls ticket service
-  umls: 5e3ab18f-17fa-43f6-9cb2-41cccacc4ad5
+  umls: ------------------------------------
 ##########################  END API KEYS ##########################
 
 
