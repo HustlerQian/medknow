@@ -59,7 +59,7 @@ load:
   # For json files
   json:
     # Path to json from harvester
-    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON_withMesh.json
+    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/enriched_harvester.json
     # Outer field name for the json documents
     docfield: documents
     # Name of the field to read text from
@@ -68,9 +68,6 @@ load:
     idfield: pmid
     # Label field
     labelfield: title
-  mesh:
-    # Path to mapping between
-    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/CUI_TO_MESH/cui2mesh.dic
   edges:
     # Path to edges file
     inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/enriched_doid.json
@@ -95,9 +92,9 @@ load:
 # Variables regarding apis
 apis:
   # Biontology for mapping cuis to uris
-  biont: -----------------------------------
+  biont: ----------------------------------
   # Umls ticket service
-  umls: ------------------------------------
+  umls: -----------------------------------
 ##########################  END API KEYS ##########################
 
 
@@ -123,15 +120,17 @@ out:
    # Resulting .json file before neo4j
   json:
     # Path
-    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/out/enriched_json_enriched.json
+    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/out/enriched_json_fullbody.json
     # Output json outer field name for the documents
     json_doc_field: relations
     # Output json text field for each document
     json_text_field: text
     # Output Idfield
-    json_id_field: pmid
+    json_id_field: id
     # Output Label field
     json_label_field: title
+    # Sentence Prefix
+    sent_prefix: abstract
   # Resulting .json file before neo4j
   csv:
     # Path
