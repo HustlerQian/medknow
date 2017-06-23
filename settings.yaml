@@ -10,7 +10,7 @@ pipeline:
   # What  to read
   in:
     # Input
-    inp: edges # med_rec or json currently. Future, the doid sample etc..
+    inp: json # med_rec or json currently. Future, the doid sample etc..
   # What to do with it
   trans:
     # Extract entities using metamap?
@@ -18,17 +18,17 @@ pipeline:
     # Extract relations using reverb?
     reverb: False
     # Extract entities + relations through semrep?
-    semrep: False
+    semrep: True
     # Transform edges, fetching concepts and other info?
     get_concepts_from_edges: False
   # What to do with the outcome
   out:
     # Create json output?
-    json: False
+    json: True
     # Create .csv files for neo4j?
-    csv: True
+    csv: False
     # Create-update neo4 db?
-    neo4j: True
+    neo4j: False
 ########################## END PIPELINE ########################## 
 
 
@@ -59,15 +59,15 @@ load:
   # For json files
   json:
     # Path to json from harvester
-    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/enriched_harvester.json
+    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON_pmc_sample.json
     # Outer field name for the json documents
     docfield: documents
     # Name of the field to read text from
-    textfield: abstractText
+    textfield: body_Filtered
     # Idfield
     idfield: pmid
     # Label field
-    labelfield: title
+    labelfield: None
   edges:
     # Path to edges file
     inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/enriched_doid.json
@@ -92,9 +92,9 @@ load:
 # Variables regarding apis
 apis:
   # Biontology for mapping cuis to uris
-  biont: ----------------------------------
+  biont: 1dd5cfd3-3a7b-4d34-8254-242e72d2a12b
   # Umls ticket service
-  umls: -----------------------------------
+  umls: 5e3ab18f-17fa-43f6-9cb2-41cccacc4ad5
 ##########################  END API KEYS ##########################
 
 
@@ -122,7 +122,7 @@ out:
     # Path
     out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/out/enriched_json_fullbody.json
     # Output json outer field name for the documents
-    json_doc_field: relations
+    json_doc_field: documents
     # Output json text field for each document
     json_text_field: text
     # Output Idfield
