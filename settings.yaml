@@ -10,7 +10,7 @@ pipeline:
   # What  to read
   in:
     # Input
-    inp: json # med_rec or json currently. Future, the doid sample etc..
+    inp: edges # med_rec or json currently. Future, the doid sample etc..
   # What to do with it
   trans:
     # Extract entities using metamap?
@@ -18,9 +18,9 @@ pipeline:
     # Extract relations using reverb?
     reverb: False
     # Extract entities + relations through semrep?
-    semrep: True
+    semrep: False
     # Transform edges, fetching concepts and other info?
-    get_concepts_from_edges: False
+    get_concepts_from_edges: True
   # What to do with the outcome
   out:
     # Create json output?
@@ -59,31 +59,30 @@ load:
   # For json files
   json:
     # Path to json from harvester
-    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON_pmc_sample.json
+    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/Tasos_Tests/Article_PMC_abstracts_ENRICHED.json
     # Outer field name for the json documents
     docfield: documents
     # Name of the field to read text from
-    textfield: body_Filtered
+    textfield: abstractText
     # Idfield
     idfield: pmid
     # Label field
-    labelfield: None
+    labelfield: title
   edges:
     # Path to edges file
-    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/enriched_doid.json
+    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/Tasos_Tests/Edges_DRUGBANK_2.json
     # Name of the field where edges are stored
     edge_field: relations
     # Currently [Entity, Article and any new one]
     # Type of the subject
-    sub_type: Entity  
+    sub_type: Entity
     # Type of the object
     obj_type: Entity
     # Currently [UMLS for cuis, PMC or TEXT for articles, None for precomputed and whatever else for DRUGBANK,MSH etc]
     # Id_field of the subject
-    sub_source: UMLS
+    sub_source: DRUGBANK
     # Id_field of the subject
-    obj_source: UMLS
-    
+    obj_source: SWISS_PROT
 ##########################  END INPUT ##########################
 
 
@@ -92,9 +91,9 @@ load:
 # Variables regarding apis
 apis:
   # Biontology for mapping cuis to uris
-  biont: ------------------------------------
+  biont: 1dd5cfd3-3a7b-4d34-8254-242e72d2a12b
   # Umls ticket service
-  umls: -------------------------------------
+  umls: 5e3ab18f-17fa-43f6-9cb2-41cccacc4ad5
 ##########################  END API KEYS ##########################
 
 
@@ -120,9 +119,9 @@ out:
    # Resulting .json file before neo4j
   json:
     # Path
-    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/out/enriched_json_fullbody.json
+    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/Tasos_Tests/Edges_DRUG_ENRICHED2.json
     # Output json outer field name for the documents
-    json_doc_field: documents
+    json_doc_field: relations
     # Output json text field for each document
     json_text_field: text
     # Output Idfield
