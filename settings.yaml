@@ -18,19 +18,19 @@ pipeline:
     # Extract relations using reverb?
     reverb: False
     # Extract entities + relations through semrep?
-    semrep: True
+    semrep: False 
     # Transform edges, fetching concepts and other info?
     get_concepts_from_edges: False
   # What to do with the outcome
   out:
     # Create json output?
-    json: True
+    json: False
     # Create .csv files for neo4j?
     csv: False
     # Create-update neo4 db?
-    neo4j: False
+    neo4j: True
     # Create-update sentences in mongo?
-    mongo: True
+    mongo: False
 ########################## END PIPELINE ########################## 
 
 
@@ -56,20 +56,20 @@ load:
     textfield: PrimaryDiagnosisDescription
     # Field separator
     sep: \t
-    # Idfield
+    # idfield
     idfield: AdmissionID
   # For json files
   json:
     # Path to json from harvester
-    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/Tasos_Tests/Article_PMC_full.json
+    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON/LC_pubmed_ENRICHED.json
     # Outer field name for the json documents
     docfield: documents
     # Name of the field to read text from
-    textfield: body_Filtered
+    textfield: text
     # Idfield
-    idfield: pmid
+    idfield: id
     # Label field
-    labelfield: None
+    labelfield: title
   edges:
     # Path to edges file
     inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/Tasos_Tests/Edges_DRUGBANK_2.json
@@ -93,9 +93,9 @@ load:
 # Variables regarding apis
 apis:
   # Biontology for mapping cuis to uris
-  biont: -------------------------------------
+  biont: 1dd5cfd3-3a7b-4d34-8254-242e72d2a12b
   # Umls ticket service
-  umls: -------------------------------------
+  umls: 5e3ab18f-17fa-43f6-9cb2-41cccacc4ad5
 ##########################  END API KEYS ##########################
 
 
@@ -133,7 +133,7 @@ out:
    # Resulting .json file before neo4j
   json:
     # Path
-    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/Tasos_Tests/Article_PMC_full_ENRICHED.json
+    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON/LC_pubmed_ENRICHED.json
     # Output json outer field name for the documents
     json_doc_field: documents
     # Output json text field for each document
@@ -143,7 +143,7 @@ out:
     # Output Label field
     json_label_field: title
     # Sentence Prefix
-    sent_prefix: fullbody
+    sent_prefix: abstract
   # Resulting .json file before neo4j
   csv:
     # Path
@@ -156,6 +156,3 @@ out:
     # Just for printing! Change the mongo field variables, not this!
     out_path: localhost:27017
 ##########################  END OUTPUT ##########################
-
-
-
