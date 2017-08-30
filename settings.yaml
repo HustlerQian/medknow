@@ -61,11 +61,11 @@ load:
   # For json files
   json:
     # Path to json from harvester
-    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON/AD_PMC_small_test.json
+    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON/AD_PMC_TEST2.json
     # Outer field name for the json documents
     docfield: documents
     # Name of the field to read text from
-    textfield: body_Filtered
+    textfield: text
     # Idfield
     idfield: id
     # Label field
@@ -133,7 +133,7 @@ out:
    # Resulting .json file before neo4j
   json:
     # Path
-    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON/AD_PMC_small_test_enriched.json
+    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON/AD_PMC_TEST2_enriched.json
     # Output json outer field name for the documents
     json_doc_field: documents
     # Output json text field for each document
