@@ -10,7 +10,9 @@ pipeline:
   # What  to read
   in:
     # Input
-    inp: edges # med_rec or json currently. Future, the doid sample etc..
+    inp: edges # med_rec, edges or json currently. Future, the doid sample etc..
+    # Do we want to do it all in a streaming fashion?
+    stream: True
   # What to do with it
   trans:
     # Extract entities using metamap?
@@ -20,15 +22,15 @@ pipeline:
     # Extract entities + relations through semrep?
     semrep: False
     # Transform edges, fetching concepts and other info?
-    get_concepts_from_edges: False
+    get_concepts_from_edges: True
   # What to do with the outcome
   out:
     # Create json output?
-    json: False
+    json: True
     # Create .csv files for neo4j?
     csv: False
     # Create-update neo4 db?
-    neo4j: True
+    neo4j: False
     # Create-update sentences in mongo?
     mongo: False
 ########################## END PIPELINE ########################## 
@@ -61,30 +63,30 @@ load:
   # For json files
   json:
     # Path to json from harvester
-    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON/IASIS_Samples/AD_sample/pmc/JSON_copy.json
+    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/append_tests/JSON.json
     # Outer field name for the json documents
     docfield: documents
     # Name of the field to read text from
-    textfield: body_Filtered
+    textfield: abstractText
     # Idfield
     idfield: pmid
     # Label field
-    labelfield: None
+    labelfield: title
   edges:
     # Path to edges file
-    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/Tasos_Tests/Edges_DOID_ENRICHED.json
+    inp_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/append_tests/LC_SAMPLE_JSON.json
     # Name of the field where edges are stored
     edge_field: relations
     # Currently [Entity, Article and any new one]
     # Type of the subject
-    sub_type: Entity
+    sub_type: Article
     # Type of the object
     obj_type: Entity
     # Currently [UMLS for cuis, PMC or TEXT for articles, None for precomputed and whatever else for DRUGBANK,MSH etc]
     # Id_field of the subject
-    sub_source: UMLS
+    sub_source: None
     # Id_field of the subject
-    obj_source: UMLS
+    obj_source: MSH
 ##########################  END INPUT ##########################
 
 
@@ -95,7 +97,7 @@ apis:
   # Biontology for mapping cuis to uris
   biont: -----------------------------------
   # Umls ticket service
-  umls: ------------------------------------
+  umls: -----------------------------------
 ##########################  END API KEYS ##########################
 
 
@@ -125,7 +127,9 @@ mongo:
   collection: Articles
 ##########################  END MONGODB ##########################
 
-
+########################## CACHE  ############################
+cache_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/cache.json
+########################## END CACHE  ############################
 
 ##########################  OUTPUT ##########################
 # Output variables
@@ -133,7 +137,7 @@ out:
    # Resulting .json file before neo4j
   json:
     # Path
-    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/JSON/IASIS_Samples/AD_sample/pmc/JSON_ENRICHED_CORRECT.json
+    out_path: /media/kostas/DATA/LLD/Papers/BioASQ/MARIOS_PROJECT/append_tests/LC_WRONG.json
     # Output json outer field name for the documents
     json_doc_field: relations
     # Output json text field for each document
@@ -141,9 +145,9 @@ out:
     # Output Idfield
     json_id_field: id
     # Output Label field
-    json_label_field: title
+    json_label_field: title 
     # Sentence Prefix
-    sent_prefix: fullText
+    sent_prefix: abstractText
   # Resulting .json file before neo4j
   csv:
     # Path
